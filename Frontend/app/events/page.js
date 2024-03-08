@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
 
 import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import timeGridPlugin from '@fullcalendar/timegrid' // a plugin!
-import interactionPlugin from '@fullcalendar/interaction' // a plugin!
+import dayGridPlugin from '@fullcalendar/daygrid' 
+import timeGridPlugin from '@fullcalendar/timegrid' 
+import interactionPlugin from '@fullcalendar/interaction' 
 
 
 const EventsPage = () => {
@@ -190,7 +190,7 @@ return (
   </div>
 </>
 
-   );
+  );
 }
 
 export default EventsPage;
