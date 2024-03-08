@@ -102,8 +102,8 @@ return (
   <aside id="logo-sidebar" className="hidden lg:block fixed top-0 left-0 z-40 w-64 h-screen  transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
     <div className="h-full px-3 py-4 overflow-y-auto bg-title-400">
       <a href="/" className="flex items-center ps-2.5 mb-5 ">
-        <img src="logo.jpg" className="h-6 me-3 sm:h-10" alt="ie_logo" />
-        <span className="self-center text-xl font-semibold whitespace-nowrap text-white">IE NITK</span>
+        <img src="calender.png" className="h-6 me-3 sm:h-10" alt="ie_logo" />
+        <span className="self-center text-xl font-semibold whitespace-nowrap text-white">Calender</span>
       </a>
       <ul className="space-y-2 font-medium text-white">
       <li>
@@ -164,7 +164,7 @@ return (
 
   <div className="lg:ml-64">
     <div className="h-16 bg-title-500">
-      <h1 className="text-title text-xl sm:text-3xl font-bold tracking-wide leading-tight pt-4 pl-5 sm:pl-9">Club Events Management</h1>
+      <h1 className="text-title text-xl sm:text-3xl font-bold tracking-wide leading-tight pt-4 pl-5 sm:pl-9">Events Management</h1>
     </div>
     <div className="overflow-y-auto" style={{ height: 'calc(100vh - 4rem)' }}>
       <div className="flex justify-center m-4 mt-10 lg:m-0 lg:mt-10">

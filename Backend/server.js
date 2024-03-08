@@ -11,7 +11,7 @@ const flash = require('express-flash')
 app.use(cors());
 
 // Database connection
-mongoose.connect('mongodb://127.0.0.1:27017/userDB', {
+mongoose.connect('mongodb://127.0.0.1:27017/WEB-Project', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
