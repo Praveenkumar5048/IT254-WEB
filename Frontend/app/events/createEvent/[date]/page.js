@@ -1,8 +1,6 @@
-// components/EventForm.js
 "use client";
 import { useRouter, usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react';
-import Navbar from '@/components/Navbar';
 
 const EventForm = () => {
 

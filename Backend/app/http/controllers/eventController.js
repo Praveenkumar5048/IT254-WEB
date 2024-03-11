@@ -44,7 +44,7 @@ function eventController() {
         if (!event) {
           return res.status(404).json({ message: 'Event not found' });
         }
-
+      
         return res.status(200).json(event);
       } catch (error) {
         console.error(error);

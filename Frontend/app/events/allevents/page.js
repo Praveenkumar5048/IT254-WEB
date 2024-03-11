@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import {useState, useEffect} from 'react';
-
+import  Sidenav from "../../../components/Sidenav"
 
 const page = () => {
 
@@ -60,13 +60,37 @@ const page = () => {
     fetchOrganizerNames();
   }, [events]);
 
+  const handleDelete = (eventId) => {
+
+    const deleteEvent = async (eventId) => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/deleteEvent/${eventId}`, {
+          method: 'DELETE',
+        });
+        if (response.ok) {
+          window.location.href = '/events';
+        } else {
+          console.error('Error deleting event:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error deleting event:', error);
+      }
+    };
+
+    if (window.confirm('Are you sure you want to delete this event?')) {
+      deleteEvent(eventId);
+    }
+  };
 
   return (
     <>
        
-       <div className="p-10">
-        <h2 className="text-4xl font-bold mb-8 text-center my-10 text-teal-600">✨ Elevate Your Experience: Join Our Exciting Events! 🚀</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <Sidenav />
+
+
+       <div className="lg:ml-64 p-10">
+        <h2 className="text-4xl font-bold text-center mb-10 text-teal-600">✨ Elevate Your Experience: Join Our Exciting Events! 🚀</h2>
+        <div className="flex flex-col gap-10 p-10">
         {events.map((event) => (
             <div key={event._id} className="bg-white border border-gray-300 p-6 rounded-md shadow-lg transition-transform hover:scale-105">
               <h3 className="text-2xl font-semibold mb-4 text-teal-600">{event.title}</h3>
@@ -110,7 +134,7 @@ const page = () => {
                     </svg>
                     Edit Event
                   </a>
-                  <button className="text-red-500  mt-6 hover:underline flex items-center"  onClick={() => handleDelete(event._id)}>
+                  <button className="text-red-500  hover:underline flex items-center"  onClick={() => handleDelete(event._id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="delete" stroke="#FF0000" fill="none" strokeLinecap="round" strokeLinejoin="round">
                       <g fill="none" fillRule="evenodd" stroke="#FF0000">
                         <path d="M5.5 7.5V20A1.5 1.5 0 0 0 7 21.5h11a1.5 1.5 0 0 0 1.5-1.5V7.5h-14z"></path>
