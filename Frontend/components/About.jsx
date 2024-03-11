@@ -49,7 +49,7 @@ const About = () => {
   return (
     <div>
        <div className="bg-gradient-to-b from-teal-500 to-teal-700 text-white text-center py-16">
-          <h1 className="text-4xl md:text-6xl font-bold mb-12 tracking-wide">About US</h1>
+          <h1 className="text-3xl md:text-5xl font-bold mb-12 tracking-wide">About US</h1>
           <p className="mx-12 text-lg md:text-xl mb-8 opacity-80">
             When you bring together people from different backgrounds, you'll be surprised how diverse their lines of thought are, and yet, you'll find them supporting your revolutionary ideas. 
           </p>

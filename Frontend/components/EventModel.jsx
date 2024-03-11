@@ -1,8 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarAlt, faClock, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { useState, useEffect } from "react";
 
-const ExampleWrapper = ({ isOpen, setIsOpen, eventId }) => {
+const EventModel = ({ isOpen, setIsOpen, eventId }) => {
 
   const [eventDetails, setEventDetails] = useState(null);
   
@@ -53,20 +55,28 @@ const ExampleWrapper = ({ isOpen, setIsOpen, eventId }) => {
           initial={{ scale: 0 }}
           animate={{ scale: 1, transition: { ease: "easeOut", duration: 0.1 } }} 
           exit={{ scale: 0 }} // No animation for disappearance
-          className="bg-gradient-to-br from-teal-300 to-title-500 text-white p-6 rounded-lg w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+          className="bg-gradient-to-br from-teal-300 to-title-500 text-white p-6 rounded-lg w-1/2 shadow-xl cursor-default relative overflow-hidden"
         >
           <div className="relative z-10 bg-white border border-gray-300 p-4 rounded-lg shadow-md text-black">
             <h3 className="text-3xl font-bold text-center mb-6">{eventDetails?.title}</h3>
-            <p className=" mb-2">{eventDetails?.description}</p>
-            <div className="border-t-2 pt-2 font-semibold">
-            <div className="flex justify-between mb-4 ">
-               <p>Organizer: {eventDetails?.organizer}</p>
-               <p>Date: {formatDate(eventDetails?.date)}</p>
+            <p className="mb-6">{eventDetails?.description}</p>
+            <p className="mb-6"><span className="font-semibold">POC :</span> {eventDetails?.organizer.name}</p>
+
+            <div className="border-t-2  pt-6 my-6 font-semibold flex flex-col justify-around md:flex-row ">
+               <div className="flex flex-col gap-4">
+                   <FontAwesomeIcon icon={faCalendarAlt} className="text-blue-500 mr-2" />
+                   <p>{formatDate(eventDetails?.date)}</p>
+               </div>
+               <div className="flex flex-col gap-4">
+                    <FontAwesomeIcon icon={faClock} className="text-green-500 mr-2" />
+                    <p>{eventDetails?.startTime} - {eventDetails?.endTime}</p>
+               </div>
+               <div className="flex flex-col gap-4">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} className="text-red-500 mr-2" />
+                    <p>{eventDetails?.location}</p>
+               </div>
             </div>
-            <div className="flex justify-between mb-4">
-               <p>Time: {eventDetails?.startTime} - {eventDetails?.endTime}</p>
-               <p>Venue: {eventDetails?.location}</p>
-            </div>
+
             <div className="flex justify-end">
               <button
                onClick={() => setIsOpen(false)}
@@ -75,7 +85,7 @@ const ExampleWrapper = ({ isOpen, setIsOpen, eventId }) => {
                Close
               </button>
             </div>
-            </div>
+
           </div>
 
           </motion.div>
@@ -85,4 +95,4 @@ const ExampleWrapper = ({ isOpen, setIsOpen, eventId }) => {
   );
 };
 
-export default ExampleWrapper;
+export default EventModel;

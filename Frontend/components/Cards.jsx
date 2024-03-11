@@ -39,7 +39,7 @@ const CardLayout = ({ cards }) => {
   
   return (
   <>
-    <h2 className="mt-10 text-4xl md:text-5xl font-extrabold mb-8 tracking-wide text-teal-600 text-center">
+    <h2 className="mt-10 text-3xl md:text-5xl font-extrabold mb-8 tracking-wide text-teal-600 text-center">
       <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-teal-600">
         Explore Our Special Interest Groups
       </span>

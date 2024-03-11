@@ -7,7 +7,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid' 
 import interactionPlugin from '@fullcalendar/interaction' 
 import  Sidenav from "../../components/Sidenav";
-import ExampleWrapper from "../../components/ExampleWrapper";
+import EventModel from "../../components/EventModel";
 
 const EventsPage = () => {
   
@@ -110,7 +110,7 @@ return (
         eventContent={renderEventContent}
         events={eventObjects} 
         />
-        <ExampleWrapper isOpen={modalOpen} setIsOpen={setModalOpen} eventId={eventId}/>
+        <EventModel isOpen={modalOpen} setIsOpen={setModalOpen} eventId={eventId}/>
         </div>
       </div>
 

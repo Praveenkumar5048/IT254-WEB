@@ -40,12 +40,12 @@ function eventController() {
       const { eventId } = req.params;
 
       try {
-        const event = await Event.findById(eventId);
+        const event = await Event.findById(eventId).populate('organizer');
         if (!event) {
-          return res.status(404).json({ message: 'Event not found' });
+        return res.status(404).json({ message: 'Event not found' });
         }
-      
         return res.status(200).json(event);
+      
       } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
@@ -101,47 +101,3 @@ function eventController() {
 module.exports = eventController;
 
 
-/*const Event = require('../../models/event')
-
-
-function eventController() {
-
-    return {
-        
-        async createevent(req, res) {
-                const { title, description, date, location, organizer  } = req.body
-
-                // Create a user 
-                const event = new Event({
-                    title, 
-                    description, 
-                    date, 
-                    location, 
-                    organizer
-                });
-
-                event.save()
-                .then((event) => {
-                    console.log("event added to the database");
-                    return res.status(200).json({ message: "event added to the database"});;
-                })
-                .catch((err) => {
-                    console.log(err);
-                    return res.status(404).json({ message: "Something went wrong" });;
-                });
-
-        },
-        async getEvents(req, res) {
-            try {
-              const events = await Event.find();
-              return res.status(200).json(events);
-            } catch (error) {
-              console.error(error);
-              return res.status(500).json({ message: 'Internal Server Error' });
-            }
-          },
-          
-    }
-}
-
-module.exports = eventController*/

@@ -30,15 +30,12 @@ const EventForm = () => {
     if (user) {
         const parsedUser = JSON.parse(user);
         const userRole = parsedUser.role;
-
-        // Check if the user role is admin
+        
         if (userRole !== 'admin') {
-            // User is not admin, redirect to homepage
-            router.push('/'); // Replace '/homepage' with the route you want to redirect to
+            router.push('/'); 
         }
-    } else {
-        // User is not logged in, redirect to login page
-        router.push('/auth/login'); // Replace '/login' with the route to your login page
+        } else {
+        router.push('/auth/login');
     }
 }, []);
 

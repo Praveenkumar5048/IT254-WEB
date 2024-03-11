@@ -45,7 +45,7 @@ const squareData = [
   },
   {
     id: 2,
-    src: "./club-logo.jpg"
+    src: "./p5.jpg"
   },
   {
     id: 3,
@@ -61,19 +61,19 @@ const squareData = [
   },
   {
     id: 6,
-    src: "./p3.jpg",
+    src: "./p6.jpg",
   },
   {
     id: 7,
-    src: "./p2.jpg",
+    src: "./p7.jpg",
   },
   {
     id: 8,
-    src: "./p1.jpg",
+    src: "./p8.jpg",
   },
   {
     id: 9,
-    src: "./p3.jpg"
+    src: "./p9.png"
   },
   {
     id: 10,
