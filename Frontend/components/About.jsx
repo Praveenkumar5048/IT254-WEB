@@ -1,4 +1,5 @@
 import Cards from './Cards'
+import Swiper from './Swiper'
 import  {Team} from './Team';
 
 const cards = [
@@ -57,8 +58,14 @@ const About = () => {
             Explore Our Innovations
           </button>
         </div>
-      <Cards cards={cards} />
-      <Team/>
+        <h2 className="mt-10 text-3xl md:text-5xl font-extrabold mb-8 tracking-wide text-teal-600 text-center">
+           <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-teal-600">
+           Explore Our Special Interest Groups
+           </span>
+         </h2>
+      {/* <Cards cards={cards} /> */}
+      
+      
     </div>
   );
 };

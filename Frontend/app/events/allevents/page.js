@@ -5,9 +5,7 @@ import  Sidenav from "../../../components/Sidenav"
 
 const page = () => {
 
-
   const [events, setEvents] = useState([]);
-  const [organizerNames, setOrganizerNames] = useState({});
   const [role,setRole]=useState("");
 
   useEffect(() => {
@@ -16,6 +14,7 @@ const page = () => {
         const response = await fetch('http://localhost:8080/api/getEvents');
         if (response.ok) {
           const data = await response.json();
+          console.log(data);
           setEvents(data);
           
         } else {
@@ -35,30 +34,6 @@ const page = () => {
         const userRole = parsedUser.role;
         setRole(userRole)
   }, []);
-  
-  useEffect(() => {
-    const fetchOrganizerNames = async () => {
-      const names = {};
-      await Promise.all(
-        events.map(async (event) => {
-          try {
-            const response = await fetch(`http://localhost:8080/api/getOrganizer/${event.organizer}`);
-            if (!response.ok) {
-              throw new Error(`Error fetching organizer name: ${response.status} ${response.statusText}`);
-            }
-            const data = await response.json();
-            names[event.organizer] = data.name;
-          } catch (error) {
-            console.error('Error fetching organizer name:', error.message);
-            names[event.organizer] = null;
-          }
-        })
-      );
-      setOrganizerNames(names);
-    };
-
-    fetchOrganizerNames();
-  }, [events]);
 
   const handleDelete = (eventId) => {
 
@@ -87,12 +62,17 @@ const page = () => {
        
       <Sidenav />
 
-
        <div className="lg:ml-64 p-10">
         <h2 className="text-4xl font-bold text-center mb-10 text-teal-600">✨ Elevate Your Experience: Join Our Exciting Events! 🚀</h2>
         <div className="flex flex-col gap-10 p-10">
         {events.map((event) => (
-            <div key={event._id} className="bg-white border border-gray-300 p-6 rounded-md shadow-lg transition-transform hover:scale-105">
+          <div key={event._id} className='flex p-6 rounded-md shadow-lg transition-transform hover:scale-105'>
+
+            <div className='w-1/2'>
+              <img className='w-full h-full' src={`http://localhost:8080/${event.mediaURL}`}  alt='poster'></img>
+            </div>
+
+            <div  className="bg-white pl-10 w-1/2">
               <h3 className="text-2xl font-semibold mb-4 text-teal-600">{event.title}</h3>
               <p className="text-gray-600 mb-4">{event.description}</p>
               <div className="flex items-center mb-2">
@@ -122,7 +102,7 @@ const page = () => {
                    <path d="M8 14s-1 1.5-3 2"></path>
                    <path d="M16 14s1 1.5 3 2"></path>
                 </svg>
-                <p className="text-gray-700">POC: {organizerNames[event.organizer]}</p>
+                <p className="text-gray-700">POC: {event.organizer.name}</p>
               </div>
                
               {role === 'admin' && (
@@ -146,7 +126,11 @@ const page = () => {
                   </button>
                 </div>
               )}
+              
             </div>
+
+          </div>
+
           ))}
         </div>
       </div>

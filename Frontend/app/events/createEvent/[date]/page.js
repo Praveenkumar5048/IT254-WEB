@@ -1,6 +1,7 @@
 "use client";
 import { useRouter, usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const EventForm = () => {
 
@@ -15,17 +16,20 @@ const EventForm = () => {
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [users, setUsers] = useState([]);
+  
+  const [mediaFile, setMediaFile] = useState(null);
+  const [mediaURL, setMediaURL]=useState('');
 
-  useEffect(() => {
+useEffect(() => {
     fetch('http://localhost:8080/api/users')
       .then((response) => response.json())
       .then((data) => {
         setUsers(data);
       })
       .catch((error) => console.error('Error fetching users:', error));
-  }, []);
+}, []);
 
-  useEffect(() => {
+useEffect(() => {
     const user = localStorage.getItem('user');
     if (user) {
         const parsedUser = JSON.parse(user);
@@ -39,7 +43,26 @@ const EventForm = () => {
     }
 }, []);
 
-  const handleSubmit = (e) => {
+const handleUpload = async () => {
+    const formData = new FormData()
+    formData.append('file', mediaFile)
+    try {
+     const response = await axios.post('http://localhost:8080/api/uploadposter', formData );
+     if (response.status === 201) {
+    
+       setMediaURL(response.data.path);
+
+       alert('Upload successful!');
+     } else {
+       console.error('Failed to Upload:', response.status, response.statusText);
+     }
+    } catch (error) {
+      console.error('Error Uploading :', error);
+    }
+};
+
+
+const handleSubmit = (e) => {
     e.preventDefault();
 
     const apiUrl = 'http://localhost:8080/api/createevent';
@@ -49,7 +72,7 @@ const EventForm = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, date, startTime, endTime, organizer, description, location }),
+      body: JSON.stringify({ title, date, startTime, endTime, organizer, description, location, mediaURL }),
     })
       .then((response) => {
         if (response.ok) {
@@ -60,6 +83,7 @@ const EventForm = () => {
           setTitle("");
           setStartTime('');
           setEndTime('');
+          setMediaURL('');
           router.push('/events');
         } else {
           console.error('Failed to create event');
@@ -147,6 +171,25 @@ const EventForm = () => {
             </select>
         </label>
     </div>
+    <div className="relative border border-gray-300 rounded-md px-2 py-1 flex items-center justify-between bg-white w-80">
+            <input
+            type="file"
+            id="fileInput"
+            className="absolute inset-0 opacity-0 h-full cursor-pointer"
+            onChange={(e) =>  setMediaFile(e.target.files[0])}
+            />
+            <span className="text-gray-500">Choose Image</span>
+
+            {mediaFile && (
+            <span className="truncate text-black">{mediaFile.name}</span>
+            )}
+
+          </div>
+          <button
+            type="button"
+            className="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded transition duration-300 ease-in-out"
+            onClick={handleUpload}> Upload
+          </button>
     <div className="mt-4">
         <label className="block">
             <span className="text-gray-700">Description:</span>

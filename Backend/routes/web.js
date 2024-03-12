@@ -1,7 +1,9 @@
 //controllers
 const authController = require('../app/http/controllers/authController') 
 const eventController = require('../app/http/controllers/eventController');
-const userController =require('../app/http/controllers/userController')
+const userController =require('../app/http/controllers/userController');
+const eventposter = require('../app/http/controllers/eventposter');
+
 
 function initRoutes(app) {
 
@@ -15,6 +17,8 @@ function initRoutes(app) {
     app.post('/api/createevent',eventController().createEvent)
     app.put('/api/updateEvent/:eventId', eventController().updateEvent);
     app.delete('/api/deleteEvent/:eventId', eventController().deleteEvent);
+    
+    app.post('/api/uploadposter', eventposter().Uploadposter);
 
     //usersDetails
     app.get('/api/users',userController().getUsers)
