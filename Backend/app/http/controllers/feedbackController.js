@@ -38,7 +38,7 @@ function feedbackController() {
           return res.status(404).json({ message: 'Event not found' });
         }
 
-        const feedbacks = await Feedback.find({ event: eventId });
+        const feedbacks = await Feedback.find({ event: eventId }).populate('user', 'name');
 
         return res.status(200).json(feedbacks);
       } catch (error) {
