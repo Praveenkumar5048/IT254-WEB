@@ -6,30 +6,11 @@ import  Sidenav from "../../../components/Sidenav"
 const page = () => {
 
   const [events, setEvents] = useState([]);
-<<<<<<< HEAD
   const [organizerNames, setOrganizerNames] = useState({});
   const [user,setUser]=useState(null);
   const [registeredEvents, setRegisteredEvents] = useState([]);
-=======
-  const [role,setRole]=useState("");
->>>>>>> main
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/api/getEvents');
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-          setEvents(data);
-        } else {
-          console.error('Error fetching events:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error fetching events:', error);
-      }
-    };
-  
     fetchEvents();
   }, []);
   
@@ -37,8 +18,41 @@ const page = () => {
   useEffect(() => {
     const user = localStorage.getItem('user');
         const parsedUser = JSON.parse(user);
+        fetchEventsOfUserRegistered(parsedUser._id);
         setUser(parsedUser);
   }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/getEvents');
+      if (response.ok) {
+        const data = await response.json();
+        setEvents(data);
+        console.log(data);
+      } else {
+        console.error('Error fetching events:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  };
+
+    const fetchEventsOfUserRegistered = async (userId) => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/getallregisteredeventsofuser/${userId}`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          setRegisteredEvents(data);
+        } else {
+          console.error('Error fetching events:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching events:', error);
+      }
+    };
+
+
 
   const handleDelete = (eventId) => {
 
@@ -62,31 +76,60 @@ const page = () => {
     }
   };
 
-  const toggleRegistration = (eventId) => {
-    if (registeredEvents.includes(eventId)) {
-      setRegisteredEvents((prev) => prev.filter((id) => id !== eventId));
-      console.log(`Unregistered for event with ID: ${eventId}`);
-    } else {
-      setRegisteredEvents((prev) => [...prev, eventId]);
-      console.log(`Registered for event with ID: ${eventId}`);
+  const toggleRegistration = async (eventId) => {
+    console.log(user)
+    try {
+      if (registeredEvents.includes(eventId)) {
+        const response = await fetch('http://localhost:8080/api/unregisteruser', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: user._id,
+            eventId: eventId,
+          }),
+        });
+        if (response.ok) {
+          fetchEvents();
+          fetchEventsOfUserRegistered(user._id);
+          console.log(`Unregistered for event with ID: ${eventId}`);
+        } else {
+          console.error('Error unregistering for event:', response.statusText);
+        }
+      } else {
+        const response = await fetch('http://localhost:8080/api/registeruser', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: user._id,
+            eventId: eventId,
+          }),
+        });
+        if (response.ok) {
+          fetchEvents();
+          fetchEventsOfUserRegistered(user._id);
+          console.log(`Registered for event with ID: ${eventId}`);
+        } else {
+          console.error('Error registering for event:', response.statusText);
+        }
+      }
+    } catch (error) {
+      console.error('Error toggling registration:', error);
     }
   };
-
   
 
   return (
-<<<<<<< HEAD
-    <> 
-       <Sidenav />
-=======
-    <>
-       
-      <Sidenav />
 
->>>>>>> main
+    <> 
+
+       <Sidenav />
        <div className="lg:ml-64 p-10">
         <h2 className="text-4xl font-bold text-center mb-10 text-teal-600">✨ Elevate Your Experience: Join Our Exciting Events! 🚀</h2>
-        <div className="flex flex-col gap-10 p-10">
+        <div className="flex flex-col gap-10 p-10" key={events}>
         {events.map((event) => (
           <div key={event._id} className='flex p-6 rounded-md shadow-lg transition-transform hover:scale-105'>
 
@@ -97,6 +140,7 @@ const page = () => {
             <div  className="bg-white pl-10 w-1/2">
               <h3 className="text-2xl font-semibold mb-4 text-teal-600">{event.title}</h3>
               <p className="text-gray-600 mb-4">{event.description}</p>
+              <p className="text-gray-700 mb-2">Total Registrations: {event.totalRegistrations}</p>
               <div className="flex items-center mb-2">
                 <svg className="w-4 h-4 text-gray-500 mr-2" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <rect width="18" height="18" x="3" y="2" rx="2" ry="2"></rect>
@@ -147,35 +191,22 @@ const page = () => {
                   </button>
                 </div>
               )}
-<<<<<<< HEAD
-              <div className="flex justify-around">
-                <button
-                  className="text-green-500 hover:underline flex items-center"
+
+              <div className="flex justify-around" key={registeredEvents}>
+              <button
+                  className={`bg-${
+                    registeredEvents.includes(event._id) ? 'red' : 'green'
+                  }-500 text-white hover:bg-${
+                    registeredEvents.includes(event._id) ? 'red' : 'green'
+                  }-700 rounded-xl hover:shadow-md px-4 py-2 flex items-center border border-${
+                    registeredEvents.includes(event._id) ? 'red' : 'green'
+                  }-500`}
                   onClick={() => toggleRegistration(event._id)}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    id="register"
-                    stroke="#008000"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 16s-1-1.5-3-2"></path>
-                    <path d="M16 16s1-1.5 3-2"></path>
-                  </svg>
                   {registeredEvents.includes(event._id) ? 'Unregister' : 'Register'}
                 </button>
-
-                {/* ... (existing code) */}
               </div>
-=======
-              
->>>>>>> main
+
             </div>
 
           </div>
@@ -183,9 +214,6 @@ const page = () => {
           ))}
         </div>
       </div>
-    
-    
-    
     </>
   )
 }

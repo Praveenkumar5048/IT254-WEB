@@ -1,4 +1,5 @@
 const Event = require('../../models/event');
+const Register = require('../../models/registration');
 
 function eventController() {
   return {
@@ -30,12 +31,17 @@ function eventController() {
     async getEvents(req, res) {
       try {
         const events = await Event.find().populate('organizer', 'name');
-        return res.status(200).json(events);
+        const eventsWithTotalRegistrations = await Promise.all(events.map(async event => {
+          const totalRegistrations = await Register.countDocuments({ event: event._id });
+          return { ...event.toObject(), totalRegistrations };
+        }));
+        return res.status(200).json(eventsWithTotalRegistrations);
       } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
       }
     },
+    
     
     async getEventDetails(req, res) {
       const { eventId } = req.params;

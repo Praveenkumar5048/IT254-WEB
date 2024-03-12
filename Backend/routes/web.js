@@ -1,10 +1,9 @@
 //controllers
 const authController = require('../app/http/controllers/authController') 
 const eventController = require('../app/http/controllers/eventController');
-const userController =require('../app/http/controllers/userController')
-const registrationController=require('../http/controllers/registrationController')
+const userController = require('../app/http/controllers/userController')
+const registrationController = require('../app/http/controllers/registrationController')
 const eventposter = require('../app/http/controllers/eventposter');
-
 
 function initRoutes(app) {
 
@@ -27,6 +26,7 @@ function initRoutes(app) {
 
     //registration Controller
     app.get('/api/gettotalregistration/:eventId',registrationController().getTotalRegisteredUsers)
+    app.get('/api/getallregisteredeventsofuser/:userId',registrationController().getAllRegisteredEventsOfUser)
     app.post('/api/registeruser',registrationController().registerUser)
     app.delete('/api/unregisteruser',registrationController().unregisterUser)
     

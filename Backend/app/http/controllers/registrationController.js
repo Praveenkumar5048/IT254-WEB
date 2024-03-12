@@ -1,4 +1,4 @@
-const Register = require('../../models/register');
+const Register = require('../../models/registration');
 
 function registrationController() {
   return {
@@ -14,9 +14,21 @@ function registrationController() {
       }
     },
 
+    async getAllRegisteredEventsOfUser(req, res) {
+      const { userId } = req.params;
+
+      try {
+        const registeredEvents = await Register.find({ user: userId }).select('event');
+        const eventIds = registeredEvents.map(event => event.event);
+        return res.status(200).json(eventIds);
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+      }
+    },
+    
     async registerUser(req, res) {
       const { userId, eventId } = req.body;
-
       try {
         const existingRegistration = await Register.findOne({ user: userId, event: eventId });
         if (existingRegistration) {
@@ -29,8 +41,6 @@ function registrationController() {
         });
 
         await registration.save();
-
-        console.log('User registered successfully for the event');
         return res.status(200).json({ message: 'User registered successfully for the event' });
       } catch (error) {
         console.error(error);
@@ -42,13 +52,11 @@ function registrationController() {
         const { userId, eventId } = req.body;
       
         try {
-          // Find and delete the registration entry based on user and event
           const deletedRegistration = await Register.findOneAndDelete({ user: userId, event: eventId });
       
           if (!deletedRegistration) {
             return res.status(404).json({ message: 'Registration entry not found' });
           }
-          console.log('User unregistered successfully from the event');
           return res.status(200).json({ message: 'User unregistered successfully from the event' });
         } catch (error) {
           console.error(error);
