@@ -29,7 +29,6 @@ const page = () => {
       if (response.ok) {
         const data = await response.json();
         setEvents(data);
-        console.log(data);
       } else {
         console.error('Error fetching events:', response.statusText);
       }
@@ -194,18 +193,29 @@ const page = () => {
               )}
 
               <div className="flex justify-around" key={registeredEvents}>
-              <button
-                  className={`bg-${
-                    registeredEvents.includes(event._id) ? 'red' : 'green'
-                  }-500 text-white hover:bg-${
-                    registeredEvents.includes(event._id) ? 'red' : 'green'
-                  }-700 rounded-xl hover:shadow-md px-4 py-2 flex items-center border border-${
-                    registeredEvents.includes(event._id) ? 'red' : 'green'
-                  }-500`}
-                  onClick={() => toggleRegistration(event._id)}
-                >
-                  {registeredEvents.includes(event._id) ? 'Unregister' : 'Register'}
+
+              { registeredEvents.includes(event._id) && event.endTime && new Date(event.endDate) < new Date() ? (
+               
+                <button className = 'bg-blue-600 text-white hover:bg-blue-800 rounded-xl px-4 py-2'>
+                 Feedback
                 </button>
+              ) : (
+                new Date(event.endDate) > new Date() && (
+                  <button
+                    className={`bg-${
+                      registeredEvents.includes(event._id) ? 'red' : 'green'
+                    }-500 text-white hover:bg-${
+                      registeredEvents.includes(event._id) ? 'red' : 'green'
+                    }-700 rounded-xl hover:shadow-md px-4 py-2 flex items-center border border-${
+                      registeredEvents.includes(event._id) ? 'red' : 'green'
+                    }-500`}
+                    onClick={() => toggleRegistration(event._id)}
+                  >
+                    {registeredEvents.includes(event._id) ? 'Unregister' : 'Register'}
+                  </button>
+                )
+              )}
+
               </div>
 
             </div>

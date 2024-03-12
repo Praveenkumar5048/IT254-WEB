@@ -49,7 +49,6 @@ function eventController() {
     },
     
     
-    
     async getEventDetails(req, res) {
       const { eventId } = req.params;
 
