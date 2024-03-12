@@ -51,19 +51,31 @@ function eventController() {
     
     async getEventDetails(req, res) {
       const { eventId } = req.params;
-
+    
       try {
         const event = await Event.findById(eventId).populate('organizer');
         if (!event) {
-        return res.status(404).json({ message: 'Event not found' });
+          return res.status(404).json({ message: 'Event not found' });
         }
-        return res.status(200).json(event);
-      
+        
+        const totalRegistrations = await Register.countDocuments({ event: eventId });
+        const feedbacks = await Feedback.find({ event: eventId });
+        const ratings = feedbacks.map(feedback => feedback.rating);
+        const totalRatings = ratings.length > 0 ? ratings.reduce((acc, rating) => acc + rating) / ratings.length : 0;
+    
+        const eventDetails = {
+          ...event.toObject(),
+          totalRegistrations,
+          rating: totalRatings
+        };
+    
+        return res.status(200).json(eventDetails);
       } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
       }
     },
+    
 
     async updateEvent(req, res) {
       const { eventId } = req.params;
