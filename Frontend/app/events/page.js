@@ -41,8 +41,8 @@ const EventsPage = () => {
     return {
       id: event._id,
       title: event.title,
-      start: `${event.startDate.substring(0, 13)}${event.startTime}:00`,
-      end:`${event.endDate.substring(0, 13)}${event.endTime}:00`,
+      start: `${event.startDate.substring(0, 11)}${event.startTime}:00`,
+      end:`${event.endDate.substring(0, 11)}${event.endTime}:00`,
       backgroundColor: backgroundColor,
     };
   });

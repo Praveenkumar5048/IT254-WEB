@@ -7,7 +7,8 @@ const EditEventPage = () => {
   const [eventDetails, setEventDetails] = useState({
     title: '',
     description: '',
-    date: '',
+    startDate: '',
+    endDate: '',
     location: '',
     organizer:'',
   });
@@ -113,12 +114,21 @@ const EditEventPage = () => {
             </div>
 
             <div>
-            <label className="block text-sm font-medium text-gray-700">Date:</label>
+            <label className="block text-sm font-medium text-gray-700">Start Date:</label>
             <input
                 type="date"
                 className="mt-1 p-2 w-full border rounded-md"
-                value={eventDetails.date}
-                onChange={(e) => setEventDetails({ ...eventDetails, date: e.target.value })}
+                value={eventDetails.startDate}
+                onChange={(e) => setEventDetails({ ...eventDetails, startDate: e.target.value })}
+            />
+            </div>
+            <div>
+            <label className="block text-sm font-medium text-gray-700">End Date:</label>
+            <input
+                type="date"
+                className="mt-1 p-2 w-full border rounded-md"
+                value={eventDetails.endDate}
+                onChange={(e) => setEventDetails({ ...eventDetails, endDate: e.target.value })}
             />
             </div>
             <div>

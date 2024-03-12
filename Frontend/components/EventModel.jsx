@@ -65,7 +65,8 @@ const EventModel = ({ isOpen, setIsOpen, eventId }) => {
             <div className="border-t-2  pt-6 my-6 font-semibold flex flex-col justify-around md:flex-row ">
                <div className="flex flex-col gap-4">
                    <FontAwesomeIcon icon={faCalendarAlt} className="text-blue-500 mr-2" />
-                   <p>{formatDate(eventDetails?.date)}</p>
+                   <p>{formatDate(eventDetails?.startDate)} - </p>
+                   <p>{formatDate(eventDetails?.endDate)}</p>
                </div>
                <div className="flex flex-col gap-4">
                     <FontAwesomeIcon icon={faClock} className="text-green-500 mr-2" />
