@@ -3,7 +3,7 @@ const Event = require('../../models/event');
 function eventController() {
   return {
     async createEvent(req, res) {
-     
+      
       const { title, description, date, startTime, endTime, location, organizer, mediaURL } = req.body;
       
       const event = new Event({
@@ -16,7 +16,7 @@ function eventController() {
         organizer,
         mediaURL
       });
-
+      
       try {
         await event.save();
         console.log("Event added to the database");
@@ -41,7 +41,7 @@ function eventController() {
       const { eventId } = req.params;
 
       try {
-        const event = await Event.findById(eventId).populate('organizer');
+        const event = await Event.findById(eventId).populate('organizer', 'name');
         if (!event) {
         return res.status(404).json({ message: 'Event not found' });
         }
