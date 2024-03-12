@@ -3,9 +3,9 @@ const Event = require('../../models/event');
 function eventController() {
   return {
     async createEvent(req, res) {
-      const { title, description, date, startTime, endTime, location, organizer } = req.body;
-
-      // Create an event
+     
+      const { title, description, date, startTime, endTime, location, organizer, mediaURL } = req.body;
+      
       const event = new Event({
         title,
         description,
@@ -14,6 +14,7 @@ function eventController() {
         endTime,
         location,
         organizer,
+        mediaURL
       });
 
       try {
@@ -28,7 +29,7 @@ function eventController() {
 
     async getEvents(req, res) {
       try {
-        const events = await Event.find();
+        const events = await Event.find().populate('organizer', 'name');
         return res.status(200).json(events);
       } catch (error) {
         console.error(error);

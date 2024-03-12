@@ -8,7 +8,13 @@ const MongoStore = require('connect-mongo')
 const passport = require('passport')
 const flash = require('express-flash')
 
+const { join } = require('path');
+
+app.use(express.json());
 app.use(cors());
+app.use(express.static('Uploads'));
+
+app.use(express.urlencoded({extended:false}));
 
 // Database connection
 mongoose.connect('mongodb://127.0.0.1:27017/WEB-Project', {
@@ -46,18 +52,16 @@ app.use(passport.session())
 
 app.use(flash())
 
-//it is usefull to tell that the data we are reciveing from client is json type
-app.use(express.json());
-
-//it is usefull to tell the exprees that the data we are revieing from client can be urlencoded  
-app.use(express.urlencoded({extended:false}));
-
 
 require('./routes/web')(app)
-app.use((req, res) => {
-  res.status(404).render('errors/404')
-})
 
+const staticPostersFilesDirectory = join(__dirname, 'Uploads', 'posters');
+
+app.use('/Uploads/posters', express.static(staticPostersFilesDirectory));
+
+app.use((req, res) => {
+  res.status(404).send('404 - Not Found');
+});
 
 app.listen(PORT , () => {
     console.log(`Listening on port ${PORT}`)
