@@ -2,6 +2,7 @@
 const authController = require('../app/http/controllers/authController') 
 const eventController = require('../app/http/controllers/eventController');
 const userController =require('../app/http/controllers/userController')
+const registrationController=require('../http/controllers/registrationController')
 
 function initRoutes(app) {
 
@@ -19,6 +20,12 @@ function initRoutes(app) {
     //usersDetails
     app.get('/api/users',userController().getUsers)
     app.get('/api/getOrganizer/:organizerId',userController().getOrganizer);
+
+    //registration Controller
+    app.get('/api/gettotalregistration/:eventId',registrationController().getTotalRegisteredUsers)
+    app.post('/api/registeruser',registrationController().registerUser)
+    app.delete('/api/unregisteruser',registrationController().unregisterUser)
+    
 }
 
 module.exports = initRoutes

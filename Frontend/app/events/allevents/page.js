@@ -5,10 +5,10 @@ import  Sidenav from "../../../components/Sidenav"
 
 const page = () => {
 
-
   const [events, setEvents] = useState([]);
   const [organizerNames, setOrganizerNames] = useState({});
-  const [role,setRole]=useState("");
+  const [user,setUser]=useState(null);
+  const [registeredEvents, setRegisteredEvents] = useState([]);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -17,7 +17,6 @@ const page = () => {
         if (response.ok) {
           const data = await response.json();
           setEvents(data);
-          
         } else {
           console.error('Error fetching events:', response.statusText);
         }
@@ -25,15 +24,15 @@ const page = () => {
         console.error('Error fetching events:', error);
       }
     };
-
+  
     fetchEvents();
   }, []);
   
+
   useEffect(() => {
     const user = localStorage.getItem('user');
         const parsedUser = JSON.parse(user);
-        const userRole = parsedUser.role;
-        setRole(userRole)
+        setUser(parsedUser);
   }, []);
   
   useEffect(() => {
@@ -82,12 +81,21 @@ const page = () => {
     }
   };
 
+  const toggleRegistration = (eventId) => {
+    if (registeredEvents.includes(eventId)) {
+      setRegisteredEvents((prev) => prev.filter((id) => id !== eventId));
+      console.log(`Unregistered for event with ID: ${eventId}`);
+    } else {
+      setRegisteredEvents((prev) => [...prev, eventId]);
+      console.log(`Registered for event with ID: ${eventId}`);
+    }
+  };
+
+  
+
   return (
-    <>
-       
-      <Sidenav />
-
-
+    <> 
+       <Sidenav />
        <div className="lg:ml-64 p-10">
         <h2 className="text-4xl font-bold text-center mb-10 text-teal-600">✨ Elevate Your Experience: Join Our Exciting Events! 🚀</h2>
         <div className="flex flex-col gap-10 p-10">
@@ -115,7 +123,6 @@ const page = () => {
                 </svg>  
                 <p className="text-gray-700">Timing : {event.startTime} </p>  
               </div> 
-
               <div className="flex items-center mb-4">
                 <svg className="w-4 h-4 text-gray-500 mr-2" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                    <circle cx="12" cy="8" r="4"></circle>
@@ -125,7 +132,7 @@ const page = () => {
                 <p className="text-gray-700">POC: {organizerNames[event.organizer]}</p>
               </div>
                
-              {role === 'admin' && (
+              { user?.role === 'admin' && (
                 <div className='flex justify-around'>
                   <a href={`/events/edit/${event._id}`} className="text-indigo-500 hover:underline mt-6 flex items-center">
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -146,6 +153,31 @@ const page = () => {
                   </button>
                 </div>
               )}
+              <div className="flex justify-around">
+                <button
+                  className="text-green-500 hover:underline flex items-center"
+                  onClick={() => toggleRegistration(event._id)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    id="register"
+                    stroke="#008000"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 16s-1-1.5-3-2"></path>
+                    <path d="M16 16s1-1.5 3-2"></path>
+                  </svg>
+                  {registeredEvents.includes(event._id) ? 'Unregister' : 'Register'}
+                </button>
+
+                {/* ... (existing code) */}
+              </div>
             </div>
           ))}
         </div>
