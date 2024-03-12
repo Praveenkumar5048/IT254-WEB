@@ -7,10 +7,11 @@ const EventForm = () => {
 
   const router = useRouter();
   const pathname = usePathname();
-  const date = pathname.split("/").pop();
+  const startDate = pathname.split("/").pop();
 
   const [title, setTitle] = useState('');
   const [startTime, setStartTime] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [organizer, setOrganizer] = useState('');
   const [description, setDescription] = useState('');
@@ -72,7 +73,7 @@ const handleSubmit = (e) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, date, startTime, endTime, organizer, description, location, mediaURL }),
+      body: JSON.stringify({ title, startDate, startTime, endDate, endTime, organizer, description, location, mediaURL }),
     })
       .then((response) => {
         if (response.ok) {
@@ -81,8 +82,9 @@ const handleSubmit = (e) => {
           setLocation("");
           setOrganizer("");
           setTitle("");
-          setStartTime('');
-          setEndTime('');
+          setStartTime(null);
+          setEndDate(null);
+          setEndTime(null);
           setMediaURL('');
           router.push('/events');
         } else {
@@ -127,8 +129,8 @@ const handleSubmit = (e) => {
             <label className="block">
                 <span className="text-gray-700">Event Date:</span>
                 <input
-                    type="text"
-                    value={date}
+                    type="date"
+                    value={startDate}
                     className="mt-1 p-2 w-full border rounded-md"
                     readOnly
                 />
@@ -139,6 +141,15 @@ const handleSubmit = (e) => {
                     type="time"
                     value={startTime}
                     onChange={(e) => setStartTime(e.target.value)}
+                    className="mt-1 p-2 w-full border rounded-md"
+                />
+            </label>
+            <label className="block">
+                <span className="text-gray-700">End Date:</span>
+                <input
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
                     className="mt-1 p-2 w-full border rounded-md"
                 />
             </label>

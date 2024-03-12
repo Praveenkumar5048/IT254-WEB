@@ -7,13 +7,14 @@ function eventController() {
   return {
     async createEvent(req, res) {
      
-      const { title, description, date, startTime, endTime, location, organizer, mediaURL } = req.body;
+      const { title, description, startDate, startTime, endDate, endTime, location, organizer, mediaURL } = req.body;
       
       const event = new Event({
         title,
         description,
-        date,
+        startDate,
         startTime,
+        endDate,
         endTime,
         location,
         organizer,
