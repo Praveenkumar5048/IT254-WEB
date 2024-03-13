@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Stories from '@/components/Stories'
 import  Navbar from "@/components/Navbar";
 import Swiper from '@/components/Swiper'
+import '../styles/global.css'
 
  const Home = () => (
   <>

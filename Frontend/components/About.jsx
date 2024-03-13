@@ -63,9 +63,6 @@ const About = () => {
            Explore Our Special Interest Groups
            </span>
          </h2>
-      {/* <Cards cards={cards} /> */}
-      
-      
     </div>
   );
 };
