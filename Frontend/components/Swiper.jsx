@@ -57,7 +57,7 @@ export default function SwiperCoverflow() {
                 loop={true} 
                 effect="coverflow"
                 coverflowEffect={{
-                    rotate: 20,
+                    rotate: 0,
                     stretch: 0,
                     depth: 100,
                     modifier: 1,
@@ -68,6 +68,7 @@ export default function SwiperCoverflow() {
                 centeredSlides
                 spaceBetween={10}
                 style={{ height: "700px" }} 
+                className = 'w-3/4'
             >
                 {cards.map((card, index) => (
                     <SwiperSlide key={index}>
