@@ -48,9 +48,6 @@ const IEStories = () => {
                 </div>
               </div>
             </div>
-  
-            {/* Add more quotes with similar structure */}
-  
           </div>
         </div>
       </section>
