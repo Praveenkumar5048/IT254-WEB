@@ -200,7 +200,7 @@ const page = () => {
                  Feedback
                 </button>
               ) : (
-                new Date(event.endDate) > new Date() && (
+                (event.endTime && new Date(event.endDate) > new Date()) && (
                   <button
                     className={`bg-${
                       registeredEvents.includes(event._id) ? 'red' : 'green'
