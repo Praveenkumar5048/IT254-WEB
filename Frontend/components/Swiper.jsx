@@ -58,7 +58,7 @@ export default function SwiperCoverflow() {
                 effect="coverflow"
                 coverflowEffect={{
                     rotate: 0,
-                    stretch: 0,
+                    stretch: -50,
                     depth: 100,
                     modifier: 1,
                     slideShadows: false,
