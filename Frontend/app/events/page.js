@@ -90,7 +90,7 @@ return (
 
   <div className="lg:ml-64">
     <div className="h-16 bg-title-500">
-      <h1 className="text-title text-xl sm:text-3xl font-bold tracking-wide leading-tight pt-4 pl-5 sm:pl-9">IE Main Calender</h1>
+      <h1 className="text-title text-xl sm:text-3xl font-bold tracking-wide leading-tight pt-4 pl-5 sm:pl-9">Club Main Calender</h1>
     </div>
     <div className="overflow-y-auto" style={{ height: 'calc(100vh - 4rem)' }}>
       <div className="flex justify-center m-4 mt-10 lg:m-0 lg:mt-10">

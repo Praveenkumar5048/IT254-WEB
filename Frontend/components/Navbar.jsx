@@ -40,7 +40,7 @@ const Navbar = () => {
                   <a href="/" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Team</a>
                 </li>
                 <li>
-                  <a href="/" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">SIGS</a>
+                  <a href="#sigs" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">SIGS</a>
                 </li>
                 <li>
                   <a href="/events" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Events</a>
@@ -51,8 +51,8 @@ const Navbar = () => {
                 <li>
                   <a href="/" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Contact Us</a>
                 </li>
-                <li>
-                  <button onClick={handleLogout} className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Logout</button>
+                <li className='bg-title-500 rounded-lg px-2 py-1 transform transition-transform duration-500 hover:scale-110'>
+                  <button onClick={handleLogout} className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:border-0 md:p-0">Logout</button>
                 </li>
               </ul>
             ) : (
@@ -73,16 +73,13 @@ const Navbar = () => {
                   <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Stories</a>
                 </li>
                 <li>
-                  <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Blog</a>
-                </li>
-                <li>
                   <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Contact Us</a>
                 </li>
-                <li>
-                  <a href="/auth/login" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Login</a>
+                <li className='bg-title-500 rounded-lg px-2 py-1 transform transition-transform duration-500 hover:scale-110'>
+                  <a href="/auth/login" className="block py-2 px-3 text-gray-900 rounded  md:hover:bg-transparent md:border-0  md:p-0">Login</a>
                 </li>
-                <li>
-                  <a href="/auth/register" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">Register</a>
+                <li className='bg-title-500 rounded-lg px-2 py-1 transform transition-transform duration-500 hover:scale-110'>
+                  <a href="/auth/register" className="block py-2 px-3 text-gray-900 rounded  md:hover:bg-transparent md:border-0  md:p-0">SignUp</a>
                 </li>
               </ul>
             )}
