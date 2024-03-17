@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 const ShuffleHero = () => {
   return (
-    <section className="w-full px-2 mb-1 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto">
+    <section className="w-full px-2 mb-1 py-6 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto min-h-screen">
       <div>
         <h3 className="text-3xl md:text-5xl font-semibold">
          Welcome  <span className="text-teal-600">  </span>
         </h3>
-        <p className="text-base md:text-lg text-slate-700 mr-3 my-4 md:my-6">
+        <p className="text-base md:text-lg text-slate-700 mr-5 my-4 md:my-6">
            When you bring together people from different backgrounds, you'll be surprised how diverse their lines of thought are, and yet, you'll find them supporting your revolutionary ideas. 
         </p>
         <button className="bg-teal-500 text-white font-medium py-2 px-4 rounded transition-all hover:bg-teal-600 active:scale-95">

@@ -6,8 +6,6 @@ import SwiperCore, {
   EffectCoverflow,
   Autoplay,
 } from "swiper";
-
-// Import Swiper styles
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
@@ -20,7 +18,7 @@ export default function SwiperCoverflow() {
     const cards = [
         {
             title: "Code",
-            details: "Code is a peer group of computer tech enthusiasts. We at Code explore various new fields and technologies in computer science and maintain a competitive coding culture in the club.",
+            details: "Code is a peer group of computer tech enthusiasts. We at Code explore various new fields and technologies in computer science and maintain a competitive",
             imagepath: "./Code.png",
         },
         {
@@ -40,44 +38,34 @@ export default function SwiperCoverflow() {
         },
         {
             title: "Robotics",
-            details: "Robotics specializes in robotic solutions for industries such as manufacturing, healthcare, and automation. We provide cutting-edge robotic systems and consultancy.",
+            details: "Robotics specializes in robotic solutions for industries such as manufacturing, healthcare, and automation. We provide cutting-edge robotic systems ",
             imagepath: "./Robotics.png",
         },
         {
             title: "Script",
-            details: "Script is a creative writing platform where writers can showcase their work, connect with readers, and explore diverse genres and styles of writing.",
+            details: "Script is a creative writing platform where writers can showcase their work, connect with readers, and explore diverse genres and styles of writing and styles of writing.",
             imagepath: "./Script.png",
         },
         {
             title: "Tectonic",
-            details: "Tectonic is a geology research institute studying seismic activities, tectonic plate movements, and geological phenomena to understand Earth's dynamic processes.",
+            details: "Tectonic is a geology research institute studying seismic activities, tectonic plate movements, and geological phenomena to understand Earth's",
             imagepath: "./Tectonic.png",
         },
     ];
     
 
   const mainSwiperRef = useRef(null);
-  const paginationSwiperRef = useRef(null);
 
   useEffect(() => {
     if (mainSwiperRef.current && mainSwiperRef.current.swiper) {
-      // Initialize main Swiper instance
       mainSwiperRef.current.swiper.update();
-    }
-    if (paginationSwiperRef.current && paginationSwiperRef.current.swiper) {
-      // Initialize pagination Swiper instance
-      paginationSwiperRef.current.swiper.update();
     }
   }, []);
 
-  const handleBulletClick = (index) => {
-    mainSwiperRef.current.swiper.slideTo(index);
-  };
-
   return (
     <div className="App mx-auto">
-      <div className="grid grid-cols-12 gap-4 items-center ml-5">
-        <div className="col-span-1 ml-5">
+      <div className="grid grid-cols-12 items-center">
+        <div className="col-span-1 ml-10">
           <button
             className="prev-button w-full"
             onClick={() => {
@@ -90,7 +78,7 @@ export default function SwiperCoverflow() {
           </button>
         </div>
 
-        <div className="col-span-9">
+        <div className="col-span-10">
           <Swiper
             ref={mainSwiperRef}
             loop={true}
@@ -102,7 +90,12 @@ export default function SwiperCoverflow() {
               modifier: 1,
               slideShadows: false,
             }}
-            slidesPerView={3}
+            slidesPerView={1} 
+            breakpoints={{
+              640: {
+                slidesPerView: 3, 
+              },
+            }}
             className="w-full"
             autoplay={{ delay: 2000 }}
           >
@@ -142,32 +135,6 @@ export default function SwiperCoverflow() {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8z"/><path d="M9.293 8.707 12.586 12l-3.293 3.293 1.414 1.414L15.414 12l-4.707-4.707-1.414 1.414z"/></svg>
           </button>
         </div>
-      </div>
-
-      <div className="pagination-container">
-        <Swiper
-          ref={paginationSwiperRef}
-          pagination={{ clickable: true }}
-          className="w-3/4"
-          onSwiper={(swiper) => {
-            paginationSwiperRef.current = swiper;
-          }}
-          onSlideChange={(swiper) => {
-            if (mainSwiperRef.current && mainSwiperRef.current.swiper) {
-              // Sync main Swiper with pagination bullets
-              mainSwiperRef.current.swiper.slideTo(swiper.activeIndex);
-            }
-          }}
-        >
-          {cards.map((card, index) => (
-            <SwiperSlide key={index}>
-              <div
-                className="swiper-pagination-bullet"
-                onClick={() => handleBulletClick(index)}
-              ></div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
       </div>
     </div>
   );
