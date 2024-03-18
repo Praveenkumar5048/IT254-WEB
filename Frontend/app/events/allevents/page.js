@@ -3,6 +3,7 @@ import React from 'react'
 import {useState, useEffect} from 'react';
 import  Sidenav from "../../../components/Sidenav"
 import StarRating from '../../../components/StarRating'
+import FeedbackModel from '../../../components/FeedbackModel';
 
 const page = () => {
 
@@ -10,6 +11,8 @@ const page = () => {
   const [organizerNames, setOrganizerNames] = useState({});
   const [user,setUser]=useState(null);
   const [registeredEvents, setRegisteredEvents] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [eventId, setEventId] = useState('');
 
   useEffect(() => {
     fetchEvents();
@@ -22,6 +25,11 @@ const page = () => {
         fetchEventsOfUserRegistered(parsedUser._id);
         setUser(parsedUser);
   }, []);
+  
+  const handleEventClick = (eventId) => {
+    setEventId(eventId);
+    setModalOpen(true);
+  };
 
   const fetchEvents = async () => {
     try {
@@ -130,7 +138,7 @@ const page = () => {
         <h2 className="text-4xl font-bold text-center mb-10 text-teal-600">✨ Elevate Your Experience: Join Our Exciting Events! 🚀</h2>
         <div className="flex flex-col gap-10 p-10" key={events}>
         {events.map((event) => (
-          <div key={event._id} className='flex p-6 rounded-md shadow-lg transition-transform hover:scale-105'>
+          <div key={event._id} className='flex p-6 rounded-md shadow-lg '>
 
             <div className='w-1/2'>
               <img className='w-full h-full' src={`http://localhost:8080/${event.mediaURL}`}  alt='poster'></img>
@@ -171,8 +179,8 @@ const page = () => {
               </div>
                
               { user?.role === 'admin' && (
-                <div className='flex justify-around'>
-                  <a href={`/events/edit/${event._id}`} className="text-indigo-500 hover:underline mt-6 flex items-center">
+                <div className='flex justify-around my-4'>
+                  <a href={`/events/edit/${event._id}`} className="text-indigo-500 hover:underline flex items-center">
                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                       <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
@@ -194,19 +202,21 @@ const page = () => {
 
               <div className="flex justify-around" key={registeredEvents}>
 
-              { registeredEvents.includes(event._id) && event.endTime && new Date(event.endDate) < new Date() ? (
-               
-                <button className = 'bg-blue-600 text-white hover:bg-blue-800 rounded-xl px-4 py-2'>
+              { new Date(event.endDate) < new Date() ? (
+                <div>
+                <button onClick={() => handleEventClick(event._id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">
                  Feedback
                 </button>
+                <FeedbackModel isOpen={modalOpen} setIsOpen={setModalOpen} eventId={eventId}/>
+                </div>
               ) : (
-                (event.endTime && new Date(event.endDate) > new Date()) && (
+                (new Date(event.endDate) > new Date()) && (
                   <button
                     className={`bg-${
                       registeredEvents.includes(event._id) ? 'red' : 'green'
                     }-500 text-white hover:bg-${
                       registeredEvents.includes(event._id) ? 'red' : 'green'
-                    }-700 rounded-xl hover:shadow-md px-4 py-2 flex items-center border border-${
+                    }-700 rounded-md hover:shadow-md px-4 py-2 flex items-center border border-${
                       registeredEvents.includes(event._id) ? 'red' : 'green'
                     }-500`}
                     onClick={() => toggleRegistration(event._id)}

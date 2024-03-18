@@ -182,25 +182,25 @@ const handleSubmit = (e) => {
             </select>
         </label>
     </div>
+    <div className='flex gap-2 mt-4'>
     <div className="relative border border-gray-300 rounded-md px-2 py-1 flex items-center justify-between bg-white w-80">
-            <input
-            type="file"
-            id="fileInput"
-            className="absolute inset-0 opacity-0 h-full cursor-pointer"
-            onChange={(e) =>  setMediaFile(e.target.files[0])}
-            />
-            <span className="text-gray-500">Choose Image</span>
+        <input
+        type="file"
+        id="fileInput"
+        className="absolute inset-0 opacity-0 h-full cursor-pointer"
+        onChange={(e) =>  setMediaFile(e.target.files[0])}
+        />
+        <span className="text-gray-500">
+             {!mediaFile ? 'Choose Event Poster' : <span className="truncate text-black">{mediaFile.name}</span>}
+        </span>
 
-            {mediaFile && (
-            <span className="truncate text-black">{mediaFile.name}</span>
-            )}
-
-          </div>
-          <button
-            type="button"
-            className="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded transition duration-300 ease-in-out"
-            onClick={handleUpload}> Upload
-          </button>
+    </div>
+        <button
+           type="button"
+           className="bg-green-500 hover:bg-green-600 text-white py-1 px-2 rounded transition duration-300 ease-in-out"
+           onClick={handleUpload}> Upload
+        </button>
+    </div>
     <div className="mt-4">
         <label className="block">
             <span className="text-gray-700">Description:</span>

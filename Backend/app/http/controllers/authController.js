@@ -11,7 +11,7 @@ function authController() {
             const { email, password } = req.body
             if(!email || !password) {
                 console.log("All fields are required")
-                return res.status(404).json({ message: "all options are rquired"});;
+                return res.status(404).json({ message: "All fields are required"});;
             }
 
             passport.authenticate('local', (err, user, info)=> {
@@ -20,8 +20,8 @@ function authController() {
                     return next(err)
                 }
                 if(!user) {
-                    console.log("user not found");
-                    return res.status(404).json({ error: "User not found", message: "Login unsuccessful" });
+                    console.log("Incorrect Credentials");
+                    return res.status(404).json({ message: "Incorrect Credentials"});
                 }
                 req.logIn(user, (err) => {
                     if(err) {
@@ -41,7 +41,7 @@ function authController() {
 
                 if(!name || !email || !password) {
                     console.log("all feilds are required");
-                    return res.status(400).json({ message: "all feilds are required" });
+                    return res.status(400).json({ message: "All fields are required" });
                 }
 
                 // Check if email exists 

@@ -79,7 +79,7 @@ function eventController() {
 
     async updateEvent(req, res) {
       const { eventId } = req.params;
-      const { title, description, date, location, organizer } = req.body;
+      const { title, description, startDate, endDate, location, organizer } = req.body;
 
       try {
         const event = await Event.findById(eventId);
@@ -90,7 +90,8 @@ function eventController() {
         // Update event details
         event.title = title;
         event.description = description;
-        event.date = date;
+        event.startDate = startDate;
+        event.endDate = endDate;
         event.location = location;
         event.organizer = organizer;
 
