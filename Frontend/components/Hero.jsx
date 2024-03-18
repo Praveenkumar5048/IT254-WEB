@@ -7,9 +7,9 @@ const ShuffleHero = () => {
     <section className="w-full px-2 mb-1 py-6 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto min-h-screen">
       <div className="animate-fadeIn">
         <h3 className="text-3xl md:text-5xl font-semibold">
-          Welcome <span className="text-teal-600"> </span>
+          <span className="text-teal-600 font-mono">WelCome</span>
         </h3>
-        <p className="text-base md:text-lg text-slate-700 mx-auto my-4 md:my-6">
+        <p className="text-base font-mono md:text-lg text-gray-500 mr-10 my-4 md:my-6">
           When you bring together people from different backgrounds, you'll be
           surprised how diverse their lines of thought are, and yet, you'll find
           them supporting your revolutionary ideas.
@@ -18,7 +18,6 @@ const ShuffleHero = () => {
           Explore
         </button>
       </div>
-
       <ShuffleGrid />
     </section>
   );

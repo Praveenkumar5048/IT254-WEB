@@ -35,7 +35,7 @@ const Navbar = () => {
           <div className="flex">
             <a href="/" className="flex-shrink-0 flex items-center">
               <img className="block h-8 w-auto" src="./club-logo.jpg" alt="Logo" />
-              <span className="font-mono self-center ml-4 text-teal-500 text-2xl font-sens font-bold whitespace-nowrap">Student Club</span>
+              <span className="font-mono self-center ml-4 text-black text-2xl font-sens font-bold whitespace-nowrap">Student Club</span>
             </a>
           </div>
           <div className="hidden lg:flex lg:items-center lg:ml-6">
