@@ -68,7 +68,7 @@ function eventController() {
           totalRegistrations,
           rating: totalRatings
         };
-    
+        
         return res.status(200).json(eventDetails);
       } catch (error) {
         console.error(error);
