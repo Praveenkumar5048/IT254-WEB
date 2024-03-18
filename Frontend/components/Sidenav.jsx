@@ -71,7 +71,7 @@ const Sidenav = () => {
                     href="/events"
                     className="flex items-center p-2  rounded-lg text-white hover:text-title-400 hover:bg-gray-100 dark:hover:bg-gray-700 group"
                   >
-                    Events
+                    Dashbord
                   </a>
                 </li>
                 <li>
@@ -143,7 +143,7 @@ const Sidenav = () => {
                 href="/events/allevents"
                 className="flex items-center p-2  rounded-lg text-white hover:text-title-400 hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
-                allevents
+                All Events
               </a>
             </li>
             <li>
