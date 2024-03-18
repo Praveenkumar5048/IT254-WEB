@@ -45,7 +45,7 @@ const FeedbackModel = ({ isOpen, setIsOpen, eventId}) => {
       <>
         {isOpen && (
           <div className="bg-slate-400/20 backdrop-blur-sm p-8 fixed inset-0 z-50 grid place-items-center overflow-y-scroll cursor-pointer">
-            <div className="bg-gradient-to-br from-slate-100 to-slate-300 text-white p-6 rounded-lg w-1/2  cursor-default relative overflow-hidden">
+            <div className="bg-gradient-to-br from-slate-100 to-slate-300 text-white p-6 rounded-lg lg:w-1/2  cursor-default relative overflow-hidden">
             <div className="flex justify-end">
               <button
                onClick={() => setIsOpen(false)}
