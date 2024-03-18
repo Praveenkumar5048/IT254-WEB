@@ -8,6 +8,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction' 
 import  Sidenav from "../../components/Sidenav";
 import EventModel from "../../components/EventModel";
+import logo from '../../public/logo.jpg'
 
 const EventsPage = () => {
   
