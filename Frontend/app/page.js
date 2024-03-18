@@ -28,31 +28,28 @@ const Home = () => {
       window.removeEventListener('routeChange', handleRouteChange);
     };
   }, []);
-
+  
   return (
-    <div>
-      <Navbar />
-
+    <>
+      <div data-aos="fade-up">
+        <Navbar />
+      </div>
       <div data-aos="fade-up">
         <Hero />
       </div>
-
       <div data-aos="fade-up">
         <About />
       </div>
-
       <div data-aos="fade-up">
         <Swiper />
       </div>
-
       <div data-aos="fade-up">
         <Team />
       </div>
-
       <div data-aos="fade-up">
         <Footer/>
       </div>
-    </div>
+    </>
   );
 };
 
