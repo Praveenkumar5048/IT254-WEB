@@ -1,148 +1,41 @@
-"use client";
-import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+// components/HeroSection.js
+import { useEffect, useRef } from "react";
 
-const ShuffleHero = () => {
+const navbarHeight = 64; // Replace 64 with the actual height of your navbar in pixels
+
+const HeroSection = () => {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const windowHeight = window.innerHeight;
+    const heroHeight = windowHeight - navbarHeight;
+    heroRef.current.style.height = `${heroHeight}px`;
+  }, []);
+
   return (
-    <section className="w-full px-2 mb-1 py-6 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto min-h-screen">
-      <div className="animate-fadeIn">
-        <h3 className="text-3xl md:text-5xl font-semibold">
-          <span className="text-teal-600 font-mono">WelCome</span>
-        </h3>
-        <p className="text-base font-mono md:text-lg text-gray-500 mr-10 my-4 md:my-6">
+    <section
+      ref={heroRef}
+      className="bg-cover bg-center flex items-center justify-center"
+      style={{ backgroundImage: "url('/hero3.jpg')" }}
+    >
+      <div className="text-center text-white">
+        <h1 className="text-4xl md:text-6xl font-bold text-teal-500 mb-4 animate-fade-in">
+          Welcome to Student Club
+        </h1>
+
+        <p className="text-lg md:text-xl w-1/2 mx-auto text-black font-bold ">
           When you bring together people from different backgrounds, you'll be
           surprised how diverse their lines of thought are, and yet, you'll find
-          them supporting your revolutionary ideas.
+          them supporting your revolutionary ideas. This diversity of
+          perspectives not only enriches discussions but also fosters creativity
+          and innovation.
         </p>
-        <button className="bg-teal-500 text-white font-medium py-2 px-4 rounded transition-all hover:bg-teal-600 active:scale-95">
-          Explore
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-8">
+          Get Started
         </button>
       </div>
-      <ShuffleGrid />
     </section>
   );
 };
 
-const shuffle = (array) => {
-  let currentIndex = array.length,
-    randomIndex;
-
-  while (currentIndex != 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
-};
-
-const squareData = [
-  {
-    id: 1,
-    src: "./p1.jpg",
-  },
-  {
-    id: 2,
-    src: "./p5.jpg",
-  },
-  {
-    id: 3,
-    src: "./p2.jpg",
-  },
-  {
-    id: 4,
-    src: "./p3.jpg",
-  },
-  {
-    id: 5,
-    src: "./p4.jpg",
-  },
-  {
-    id: 6,
-    src: "./p6.jpg",
-  },
-  {
-    id: 7,
-    src: "./p7.jpg",
-  },
-  {
-    id: 8,
-    src: "./p8.jpg",
-  },
-  {
-    id: 9,
-    src: "./p9.png",
-  },
-  {
-    id: 10,
-    src: "https://images.unsplash.com/photo-1610768764270-790fbec18178?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-  },
-  {
-    id: 11,
-    src: "./p10.png",
-  },
-  {
-    id: 12,
-    src: "https://images.unsplash.com/photo-1533107862482-0e6974b06ec4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=882&q=80",
-  },
-  {
-    id: 13,
-    src: "https://images.unsplash.com/photo-1560089000-7433a4ebbd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-  },
-  {
-    id: 14,
-    src: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=686&q=80",
-  },
-  {
-    id: 15,
-    src: "https://images.unsplash.com/photo-1606244864456-8bee63fce472?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=681&q=80",
-  },
-  {
-    id: 16,
-    src: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1820&q=80",
-  },
-];
-
-const generateSquares = () => {
-  return shuffle(squareData).map((sq) => (
-    <motion.div
-      key={sq.id}
-      layout
-      transition={{ duration: 1.5, type: "spring" }}
-      className="w-full h-full"
-      style={{
-        backgroundImage: `url(${sq.src})`,
-        backgroundSize: "cover",
-      }}
-    ></motion.div>
-  ));
-};
-
-const ShuffleGrid = () => {
-  const timeoutRef = useRef(null);
-  const [squares, setSquares] = useState(generateSquares());
-
-  useEffect(() => {
-    shuffleSquares();
-
-    return () => clearTimeout(timeoutRef.current);
-  }, []);
-
-  const shuffleSquares = () => {
-    setSquares(generateSquares());
-
-    timeoutRef.current = setTimeout(shuffleSquares, 3000);
-  };
-
-  return (
-    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1">
-      {squares.map((sq) => sq)}
-    </div>
-  );
-};
-
-export default ShuffleHero;
+export default HeroSection;

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
+import Hero from '@/components/Hero'
 import About from '@/components/About';
 import Swiper from '@/components/Swiper';
 import Team  from '@/components/Team';
