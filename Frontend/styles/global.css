@@ -19,10 +19,43 @@
 }
 
 
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px; /* Adjust the distance between cards and bullets */
+}
+
+.swiper-pagination-bullet {
+  width: 8px; /* Bullet width */
+  height: 8px; /* Bullet height */
+  background-color: rgba(0, 0, 0, 0.5); /* Bullet color */
+  border-radius: 50%; /* Rounded bullet */
+  margin: 0 5px; /* Spacing between bullets */
+  opacity: 0.5; /* Initial opacity */
+  transition: opacity 0.3s ease; /* Smooth transition for opacity */
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1; /* Active bullet opacity */
+}
+
+/* global.css or your custom CSS file */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
 
 
-
-/* Full calendar css styles  */
 
 .fc-header-toolbar .fc-prev-button,
 .fc-header-toolbar .fc-next-button,

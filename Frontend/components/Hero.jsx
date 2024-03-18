@@ -4,18 +4,21 @@ import { useEffect, useRef, useState } from "react";
 
 const ShuffleHero = () => {
   return (
-    <section className="w-full px-2 mb-1 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto">
-      <div>
+    <section className="w-full px-2 mb-1 py-6 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto min-h-screen">
+      <div className="animate-fadeIn">
         <h3 className="text-3xl md:text-5xl font-semibold">
-         Welcome  <span className="text-teal-600">  </span>
+          Welcome <span className="text-teal-600"> </span>
         </h3>
-        <p className="text-base md:text-lg text-slate-700 mr-3 my-4 md:my-6">
-           When you bring together people from different backgrounds, you'll be surprised how diverse their lines of thought are, and yet, you'll find them supporting your revolutionary ideas. 
+        <p className="text-base md:text-lg text-slate-700 mx-auto my-4 md:my-6">
+          When you bring together people from different backgrounds, you'll be
+          surprised how diverse their lines of thought are, and yet, you'll find
+          them supporting your revolutionary ideas.
         </p>
         <button className="bg-teal-500 text-white font-medium py-2 px-4 rounded transition-all hover:bg-teal-600 active:scale-95">
           Explore
         </button>
       </div>
+
       <ShuffleGrid />
     </section>
   );
@@ -45,11 +48,11 @@ const squareData = [
   },
   {
     id: 2,
-    src: "./p5.jpg"
+    src: "./p5.jpg",
   },
   {
     id: 3,
-    src: "./p2.jpg"
+    src: "./p2.jpg",
   },
   {
     id: 4,
@@ -73,7 +76,7 @@ const squareData = [
   },
   {
     id: 9,
-    src: "./p9.png"
+    src: "./p9.png",
   },
   {
     id: 10,
@@ -81,7 +84,7 @@ const squareData = [
   },
   {
     id: 11,
-    src: "https://images.unsplash.com/photo-1507034589631-9433cc6bc453?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=684&q=80",
+    src: "./p10.png",
   },
   {
     id: 12,
