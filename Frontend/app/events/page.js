@@ -18,6 +18,33 @@ const EventsPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [eventId, setEventId] = useState(null);
 
+  const [windowWidth, setWindowWidth] = useState(undefined);
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    if (typeof window !== 'undefined') { // Check if window object exists (for client-side rendering)
+      setWindowWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+    }
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+      }
+    };
+  }, []);
+
+  const aspectRatio = () => {
+    if (windowWidth !== null) {
+      if (windowWidth < 769) {
+        return 0.8;
+      } else {
+        return 1.7;
+      }
+    }
+    return 1.35;
+  };
+
   const handleDateClick = (arg) => {
     if (role === "admin") {
       router.push(`/events/createEvent/${arg.dateStr}`);
@@ -95,8 +122,8 @@ const EventsPage = () => {
           className="overflow-y-auto"
           style={{ height: "calc(100vh - 4rem)" }}
         >
-          <div className="flex justify-center m-4 mt-10 lg:m-0 lg:mt-10">
-            <div className="w-full lg:w-3/4">
+          <div className="flex justify-center lg:m-0 lg:mt-10">
+            <div className="w-full lg:w-3/4 p-2 lg:p-0 calendar-container ">
               <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
@@ -105,7 +132,7 @@ const EventsPage = () => {
                   center: "title",
                   right: "dayGridMonth,timeGridWeek,timeGridDay",
                 }}
-                aspectRatio={1.7}
+                aspectRatio = {aspectRatio()}
                 dateClick={handleDateClick}
                 eventContent={renderEventContent}
                 events={eventObjects}
