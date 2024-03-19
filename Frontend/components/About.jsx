@@ -5,11 +5,11 @@ import { useEffect, useRef, useState } from "react";
 const ShuffleHero = () => {
   return (
     <section className="w-full mb-1 py-2 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-7xl mx-auto min-h-screen">
-      <div className="bg-gradient-to-br from-teal-400 to-teal-900 text-white text-center py-8 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 lg:mr-10">
+      <div className="bg-gradient-to-br from-teal-400 to-teal-900  py-8 px-8 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 lg:mr-10">
         <h1 className="text-3xl md:text-5xl font-bold mb-4 tracking-wide">
           About Us
         </h1>
-        <div className="mx-auto text-lg md:text-xl mb-8 opacity-80">
+        <div className="text-black text-lg md:text-xl mb-8 opacity-80">
           <p className="mb-4">
             Student Club was founded with a vision to foster a vibrant and
             inclusive community on campus. Our journey began with the
