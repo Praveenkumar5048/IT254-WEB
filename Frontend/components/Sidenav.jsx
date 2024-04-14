@@ -107,7 +107,7 @@ const Sidenav = () => {
       {/* Desktop View */}
       <div
         id="logo-sidebar"
-        className="hidden lg:block fixed top-0 left-0 z-40 w-64 h-screen bg-title-400 rounded-xl"
+        className="hidden lg:block fixed top-0 left-0 z-40 w-64 h-screen bg-title-400"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto">

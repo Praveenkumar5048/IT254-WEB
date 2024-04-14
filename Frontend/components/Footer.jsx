@@ -12,9 +12,9 @@ import { faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
   return (
-    <footer className="font-poppins px-10 bg-black text-white py-8 md:py-16">
+    <footer className="px-16 bg-black text-white py-8 md:py-16 md:px-20">
       <div className="container mx-auto flex flex-wrap justify-around">
-        <div className="w-full md:w-1/2 lg:w-2/5 mb-8 md:mb-0">
+        <div className="w-full md:w-1/2 lg:w-2/5 mb-8 md:mb-2">
           <div className="mb-6 mr-5">
            <div className="flex flex-row items-center mb-4">
                 <img src="./club-logo.jpg" className="h-10 mr-4 rounded-md" alt="" />
